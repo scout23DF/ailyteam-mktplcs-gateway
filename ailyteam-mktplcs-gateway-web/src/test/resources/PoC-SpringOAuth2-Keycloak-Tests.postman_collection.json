@@ -1,0 +1,789 @@
+{
+	"info": {
+		"_postman_id": "2f290395-36bb-47a7-904b-3f9761c405d6",
+		"name": "PoC-SpringOAuth2-Keycloak-Tests",
+		"description": "PoC-SpringOAuth2-Keycloak-Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "00 - List Keycloak Permissions",
+			"item": [
+				{
+					"name": "01 - List Realm Roles Available",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "headerPrefix",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{vPoC-Soki-App-URL}}/api/sso/public/authorities/realm-roles-available",
+							"host": [
+								"{{vPoC-Soki-App-URL}}"
+							],
+							"path": [
+								"api",
+								"sso",
+								"public",
+								"authorities",
+								"realm-roles-available"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "02 - List Client Roles Available",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "headerPrefix",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{vPoC-Soki-App-URL}}/api/sso/public/authorities/clientapp-roles-available",
+							"host": [
+								"{{vPoC-Soki-App-URL}}"
+							],
+							"path": [
+								"api",
+								"sso",
+								"public",
+								"authorities",
+								"clientapp-roles-available"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "03 - List Realm Groups",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "headerPrefix",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{vPoC-Soki-App-URL}}/api/sso/public/authorities/groups-available",
+							"host": [
+								"{{vPoC-Soki-App-URL}}"
+							],
+							"path": [
+								"api",
+								"sso",
+								"public",
+								"authorities",
+								"groups-available"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "01 - Signup User(s)",
+			"item": [
+				{
+					"name": "01 - Signup (One User)",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "headerPrefix",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": null,\n    \"username\": \"zezinho.simpleuser01\",\n    \"password\": \"654321\",\n    \"rememberMe\": true,\n    \"email\": \"zezinho1@jaburu.com.br\",\n    \"firstName\": \"Jose1\",\n    \"lastName\": \"Bocoio1\", \n    \"enabled\": \"true\",\n    \"realmRoles\":  [\"ADMIN_REALM_ROLE\",  \"BASIC_REGISTERED_REALM_ROLE\"],\n    \"clientRoles\": [\"OPERATOR_CLIENT_ROLE\", \"BASIC_REGISTERED_CLIENT_ROLE\"],\n    \"groups\": [\"REGION01_GROUP\", \"REGION03_GROUP\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{vPoC-Soki-App-URL}}/api/sso/public/signup",
+							"host": [
+								"{{vPoC-Soki-App-URL}}"
+							],
+							"path": [
+								"api",
+								"sso",
+								"public",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "02 - Signup (A List of Users)",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "headerPrefix",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n    \"id\": null,\n    \"username\": \"zezinho.silva01\",\n    \"password\": \"654321\",\n    \"rememberMe\": true,\n    \"email\": \"zezinho1@jaburu.com.br\",\n    \"firstName\": \"Jose\",\n    \"lastName\": \"Silva\", \n    \"enabled\": \"true\",\n    \"realmRoles\":  [\"ADMIN_REALM_ROLE\"],\n    \"clientRoles\": [\"01_CHIEFS_CLIENT_ROLE\"],\n    \"groups\": [\"REGION0_NORTH_OFFICES_GROUP\"]\n    },\n    {\n    \"id\": null,\n    \"username\": \"pedro.sousa02\",\n    \"password\": \"abcdef\",\n    \"rememberMe\": true,\n    \"email\": \"pedro02@jaburu.com.br\",\n    \"firstName\": \"Pedro\",\n    \"lastName\": \"Sousa\", \n    \"enabled\": \"true\",\n    \"realmRoles\":  [\"OPERATOR_REALM_ROLE\"],\n    \"clientRoles\": [\"04_OPERATORS_CLIENT_ROLE\"],\n    \"groups\": [\"REGION02_GROUP\"]\n    },\n    {\n    \"id\": null,\n    \"username\": \"paulo.simplicio03\",\n    \"password\": \"123456\",\n    \"rememberMe\": true,\n    \"email\": \"paulo03@jaburu.com.br\",\n    \"firstName\": \"Paulo\",\n    \"lastName\": \"Simplicio\", \n    \"enabled\": \"true\",\n    \"realmRoles\":  [\"BASIC_REGISTERED_REALM_ROLE\"],\n    \"clientRoles\": [\"06_OUTSIDERS_CLIENT_ROLE\"],\n    \"groups\": [\"REGION03_GROUP\"]\n    }\n\n]    ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{vPoC-Soki-App-URL}}/api/sso/public/batch-signup",
+							"host": [
+								"{{vPoC-Soki-App-URL}}"
+							],
+							"path": [
+								"api",
+								"sso",
+								"public",
+								"batch-signup"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "02 - Authentication Flow",
+			"item": [
+				{
+					"name": "01 - Login (User Authentication)",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "headerPrefix",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"zezinho.silva01\",\n    \"password\": \"654321\",\n    \"rememberMe\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{vPoC-Soki-App-URL}}/api/sso/public/login",
+							"host": [
+								"{{vPoC-Soki-App-URL}}"
+							],
+							"path": [
+								"api",
+								"sso",
+								"public",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "02 - Refresh Token (JWT)",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "headerPrefix",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Refresh-Token",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{vPoC-Soki-App-URL}}/api/sso/public/refresh-token/zezinho.silva01",
+							"host": [
+								"{{vPoC-Soki-App-URL}}"
+							],
+							"path": [
+								"api",
+								"sso",
+								"public",
+								"refresh-token",
+								"zezinho.silva01"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "03 - Reset Password",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJuWC1iZURtMWRyWGkwSTlhOXNYTkhkNFRxOTdQTkcwUnNYQ3VDR1hFVHFrIn0.eyJleHAiOjE2MDM3MTczMDgsImlhdCI6MTYwMzcxNzAwOCwianRpIjoiOTI2ZDg1NDMtNDk2NC00YjZiLTg4OTgtNzNkNzMwZTQyMGExIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDgwL2F1dGgvcmVhbG1zL1BvQy1Tb2tpLVJlYWxtLTAxIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6ImQ2MTM0NGNiLTA4NGYtNDZjOS05YWM0LWZkMmRlZjkzN2IxYiIsInR5cCI6IkJlYXJlciIsImF6cCI6IlBvQy1Tb2tpLUFwcC1DbGllbnQtMDEiLCJzZXNzaW9uX3N0YXRlIjoiNDhkNjZjYWQtZjE4Ny00NzNmLWJhNzctMjEwOTVlZGYwMThhIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwOi8vbG9jYWxob3N0OjgwODUiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIkFETUlOX1JFQUxNX1JPTEUiLCJCQVNJQ19SRUdJU1RFUkVEX1JFQUxNX1JPTEUiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiUG9DLVNva2ktQXBwLUNsaWVudC0wMSI6eyJyb2xlcyI6WyJCQVNJQ19SRUdJU1RFUkVEX0NMSUVOVF9ST0xFIiwiT1BFUkFUT1JfQ0xJRU5UX1JPTEUiXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwgcm9sZXMiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwidXNlcl9uYW1lIjoiemV6aW5oby5zaW1wbGV1c2VyMDEiLCJuYW1lIjoiSm9zZTEgQm9jb2lvMSIsInByZWZlcnJlZF91c2VybmFtZSI6InplemluaG8uc2ltcGxldXNlcjAxIiwiZ2l2ZW5fbmFtZSI6Ikpvc2UxIiwiZmFtaWx5X25hbWUiOiJCb2NvaW8xIiwiZW1haWwiOiJ6ZXppbmhvMUBqYWJ1cnUuY29tLmJyIn0.eOwlTUC6tgX8_YVrX3O7EglHzL88nhSoqTteXtmcqri7M9aSTKhnfZ9qbuZZ9r_OgnNX4pPTx6-MZNjOCVyQ1H4macGkBbTLxAc9QscAPJomsgJpWO7exSTqPGRHAPjrTrTuYw_daOn4OG642Cz1Oq5dY7C1Q6r_Xa983hNUQnZPoSEshTrp-NLqbutFDQjW9YiGxOnV_Gj2kLvO-UMHp6lCZAV_Bs5QxhlXbJm8FF1gOtf-WB2eoQ5wzx7GJJ__wCGOUfF8pp7oGYBivJGHaZJd6Qvtkf7_76OQHESprtVC6jiEUNvUSNQ7BwF9Se-SMBxb-P5LKfXcIBIpeUCGxw",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"zezinho.simpleuser01\",\n    \"password\": \"jaburujones\",\n    \"rememberMe\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{vPoC-Soki-App-URL}}/api/sso/private/reset-password",
+							"host": [
+								"{{vPoC-Soki-App-URL}}"
+							],
+							"path": [
+								"api",
+								"sso",
+								"private",
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "04 - Logout",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJuWC1iZURtMWRyWGkwSTlhOXNYTkhkNFRxOTdQTkcwUnNYQ3VDR1hFVHFrIn0.eyJleHAiOjE2MDM2NTE4MTksImlhdCI6MTYwMzY1MTUxOSwianRpIjoiNDZlMWFlYTMtMWQxNy00YzdjLWEwZDMtZWEzMThkZTk5YjUzIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDgwL2F1dGgvcmVhbG1zL1BvQy1Tb2tpLVJlYWxtLTAxIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjM4ZGZmMjVjLTI3OTYtNDBjNS05NDM4LTViODNmMDIzMjgxZCIsInR5cCI6IkJlYXJlciIsImF6cCI6IlBvQy1Tb2tpLUFwcC1DbGllbnQtMDEiLCJzZXNzaW9uX3N0YXRlIjoiODA2Njk5NjEtMzJlZS00ZDI4LWI4OTgtZjhjYzVjNTEzNDFiIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwOi8vbG9jYWxob3N0OjgwODUiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIkFETUlOX1JFQUxNX1JPTEUiLCJCQVNJQ19SRUdJU1RFUkVEX1JFQUxNX1JPTEUiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiUG9DLVNva2ktQXBwLUNsaWVudC0wMSI6eyJyb2xlcyI6WyJCQVNJQ19SRUdJU1RFUkVEX0NMSUVOVF9ST0xFIiwiT1BFUkFUT1JfQ0xJRU5UX1JPTEUiXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwgcm9sZXMiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwidXNlcl9uYW1lIjoiemV6aW5oby5zaW1wbGV1c2VyMDEiLCJuYW1lIjoiSm9zZTEgQm9jb2lvMSIsInByZWZlcnJlZF91c2VybmFtZSI6InplemluaG8uc2ltcGxldXNlcjAxIiwiZ2l2ZW5fbmFtZSI6Ikpvc2UxIiwiZmFtaWx5X25hbWUiOiJCb2NvaW8xIiwiZW1haWwiOiJ6ZXppbmhvMUBqYWJ1cnUuY29tLmJyIn0.LPSHeVlI5IA5Mt_qPtb3WRD6z_qv8j2pPBfrmmgyM6LDWW7AORwV8zaV8EEUvoex64phJAptBUXzD8KvyvnOz8XUN3NbQbvgkhn_pKwosQl2ga0EJyU7TiYsYBJeNO6QbSNQFSNY684PKsVsiCJJGoewitNUrv1LMqxWfdAm6tloCArCfGre4O13gBAhMULpNg0RonxnMiopJHECJkTQQ3M-X2ZC2psh_7ZPn-DP6auv6QBOiedaosaLoxarVfJeFV7nfRi9ZUeOE0AGypaaTKJOF1_MiI-n-RRU76kizy3rqPgc-E5eWF8eQyv0BW2Qmh4umqMhWL90EeZpR93DUg",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"jwtTokenDTO\": {\n        \"lastDateTimeAccessToken\": \"2020-10-25T16:17:36.518209\",\n        \"lastDateTimeRefreshToken\": \"2020-10-25T16:17:36.520073\",\n        \"refreshTokenExpired\": false,\n        \"accessTokenExpired\": false,\n        \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJuWC1iZURtMWRyWGkwSTlhOXNYTkhkNFRxOTdQTkcwUnNYQ3VDR1hFVHFrIn0.eyJleHAiOjE2MDM2MzkzNTYsImlhdCI6MTYwMzYzOTA1NiwianRpIjoiY2NhODRkODctMTU5YS00OTdlLTg0MWItOGVjOGRmOWZkMzhhIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDgwL2F1dGgvcmVhbG1zL1BvQy1Tb2tpLVJlYWxtLTAxIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6ImU5MmE5ZWVmLTViOGYtNDg3ZS05YzUwLTcyNDQyM2Y1NTA0ZCIsInR5cCI6IkJlYXJlciIsImF6cCI6IlBvQy1Tb2tpLUFwcC1DbGllbnQtMDEiLCJzZXNzaW9uX3N0YXRlIjoiOTVkNDA5NzctMDMyMS00ODI4LWE5MzUtNGU4MzQ0OTExOGFkIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwOi8vbG9jYWxob3N0OjgwODUiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIkFETUlOX1JFQUxNX1JPTEUiLCJCQVNJQ19SRUdJU1RFUkVEX1JFQUxNX1JPTEUiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiUG9DLVNva2ktQXBwLUNsaWVudC0wMSI6eyJyb2xlcyI6WyJCQVNJQ19SRUdJU1RFUkVEX0NMSUVOVF9ST0xFIiwiQURNSU5fQ0xJRU5UX1JPTEUiXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwgcm9sZXMiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwidXNlcl9uYW1lIjoiemV6aW5oby5zaW1wbGV1c2VyMDEiLCJuYW1lIjoiSm9zZTEgQm9jb2lvMSIsInByZWZlcnJlZF91c2VybmFtZSI6InplemluaG8uc2ltcGxldXNlcjAxIiwiZ2l2ZW5fbmFtZSI6Ikpvc2UxIiwiZmFtaWx5X25hbWUiOiJCb2NvaW8xIiwiZW1haWwiOiJ6ZXppbmhvMUBqYWJ1cnUuY29tLmJyIn0.SY2t8rs9Ge5VkzJwjDGHDfjybMK88VEZ94tr4uWwJ73Js9Flc-OHRRQaueO-5uldu3TIDqQNTskNFc8mpjcGss5uZP-hN01WQnmp9lAaEtY9Phn_tBxTMg_oOD_R_S2zcYxvGy2EW4LfD3IsMWqWPsgtoM-ajKWsIYUKkmzmApjoLQKFD4A1uzOBTxo7tdf-v1L1Av1sYYZQQu8HBAcraWVOdwbzqEH-PVhI1FDHTod6k38GXP7iTnTHcdqsyrqzlpxkuzIB1zdYUZ7v6CUbzfOXqXVgfgObZG4TLDeGviGQ1UZAJ93p9p-DF5hSczVvDJbB7IWp3QkUZNU_-GRuvA\",\n        \"expires_in\": 300,\n        \"refresh_expires_in\": 1800,\n        \"refresh_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIwOGE1MDU1Ni00MjdiLTQ0NzItYWRjMi1hMTQ3Nzg5ZDY1ZTEifQ.eyJleHAiOjE2MDM2NDA4NTYsImlhdCI6MTYwMzYzOTA1NiwianRpIjoiZmI3YzcyMTQtMzc1ZC00ODA4LWI4YjItNmI1ZGY4NjNiZGFhIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDgwL2F1dGgvcmVhbG1zL1BvQy1Tb2tpLVJlYWxtLTAxIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo5MDgwL2F1dGgvcmVhbG1zL1BvQy1Tb2tpLVJlYWxtLTAxIiwic3ViIjoiZTkyYTllZWYtNWI4Zi00ODdlLTljNTAtNzI0NDIzZjU1MDRkIiwidHlwIjoiUmVmcmVzaCIsImF6cCI6IlBvQy1Tb2tpLUFwcC1DbGllbnQtMDEiLCJzZXNzaW9uX3N0YXRlIjoiOTVkNDA5NzctMDMyMS00ODI4LWE5MzUtNGU4MzQ0OTExOGFkIiwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBlbWFpbCByb2xlcyJ9.oi1hUsyQz1kQyJXcUf06K1xSozlEw8AHDArsisY8TaA\",\n        \"token_type\": \"bearer\",\n        \"not-before-policy\": 0,\n        \"session_state\": \"95d40977-0321-4828-a935-4e83449118ad\",\n        \"scope\": \"openid profile email roles\"\n    },\n    \"userDTO\": {\n        \"id\": \"e92a9eef-5b8f-487e-9c50-724423f5504d\",\n        \"username\": \"zezinho.simpleuser01\",\n        \"firstName\": \"Jose1\",\n        \"lastName\": \"Bocoio1\",\n        \"password\": null,\n        \"email\": \"zezinho1@jaburu.com.br\",\n        \"enabled\": true,\n        \"emailVerified\": true,\n        \"realmRoles\": null,\n        \"clientRoles\": null,\n        \"groups\": null\n    },\n    \"macroAccountTypeEnum\": \"USER_ACCOUNT_TYPE_REGULAR\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{vPoC-Soki-App-URL}}/api/sso/private/logout/zezinho.silva01",
+							"host": [
+								"{{vPoC-Soki-App-URL}}"
+							],
+							"path": [
+								"api",
+								"sso",
+								"private",
+								"logout",
+								"zezinho.silva01"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "03 - Business API's Simulation",
+			"item": [
+				{
+					"name": "01 - List Countries :: Public",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJyUGJ2anFBejhSTTVRU19RdldQemJDRUZFbGlfRFUzSlRyVTRnb1hmZ2xrIn0.eyJleHAiOjE2MDM2MjIwNzIsImlhdCI6MTYwMzYyMjAxMiwianRpIjoiMjYwYjkwMDYtMzkyYS00NGVlLThlYWUtNTM1MzAzNzUxMWI4IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDgwL2F1dGgvcmVhbG1zL21hc3RlciIsInN1YiI6IjFkYjg1YTViLWM3YjgtNDM1MC05NzNkLWM5ZmM5MDUxMzgxOSIsInR5cCI6IkJlYXJlciIsImF6cCI6ImFkbWluLWNsaSIsInNlc3Npb25fc3RhdGUiOiJkZmJiZmQ0NC1mODljLTQ0NWEtYTY4MS00ZmYwNDUxOTIxZjEiLCJhY3IiOiIxIiwic2NvcGUiOiJlbWFpbCBwcm9maWxlIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoiTWFuYWdlciAwMSBGcm9tIEFwcCBQcm94eSIsInByZWZlcnJlZF91c2VybmFtZSI6Im1hbmFnZXIwMS5mcm9tLmFwcC5wcm94eSIsImdpdmVuX25hbWUiOiJNYW5hZ2VyIDAxIiwiZmFtaWx5X25hbWUiOiJGcm9tIEFwcCBQcm94eSIsImVtYWlsIjoibWFuYWdlcjAxLmZyb20uYXBwLnByb3h5QHBvYy1zb2tpLmNvbSJ9.QTsUW7nl2IqEzf30LseHZJtpn2Q1NTsZP8gqKOQh_nAy8uyO48ktZWO9F2mlIA9aef2gDvBkI1q0JXg-PeBi5Th5e-lbAvK0YEvrjsduXl3y2B_3yx9Wo5xrKoZfZwKQbEnXzfQawK1aXl4OKoFnAbKctA0enS4OOSeT0lD-wdhqGekYfC6Ad5bLYYm2gh-BqCW0_31JPyg6K8nuTPFSXgvyE7hT4GkKvNTeMmoBGo1Kb9IIB08aTpEtZLdegHdPbGCU5ap1Jwm0Kp5aQF9_F2nhtsUTF3VCc3_uvbfWnH4L83cWL_ukVLin_4E-Roeuai0KJhoQaFqMJw0ARLur4g",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{vPoC-Soki-App-URL}}/api/business/countries/public",
+							"host": [
+								"{{vPoC-Soki-App-URL}}"
+							],
+							"path": [
+								"api",
+								"business",
+								"countries",
+								"public"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "02 - List Countries :: Requires Role: BASIC_REGISTERED_CLIENT_ROLE",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJuWC1iZURtMWRyWGkwSTlhOXNYTkhkNFRxOTdQTkcwUnNYQ3VDR1hFVHFrIn0.eyJleHAiOjE2MDM2NTQ4ODIsImlhdCI6MTYwMzY1NDU4MiwianRpIjoiZDNhZWFjYWUtNTA4Ny00ZjE3LWI2MTYtYTgxMjcyNWNkMTEzIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDgwL2F1dGgvcmVhbG1zL1BvQy1Tb2tpLVJlYWxtLTAxIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjY4NDg4MDEzLWMxMjctNDhiNi1hYzc0LTlkYWUwMWYxY2Y2NyIsInR5cCI6IkJlYXJlciIsImF6cCI6IlBvQy1Tb2tpLUFwcC1DbGllbnQtMDEiLCJzZXNzaW9uX3N0YXRlIjoiYTExZDYzMmMtNTI1ZC00YTljLWE0MWMtN2YzZDBlMWFlMzE4IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwOi8vbG9jYWxob3N0OjgwODUiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIkFETUlOX1JFQUxNX1JPTEUiLCJCQVNJQ19SRUdJU1RFUkVEX1JFQUxNX1JPTEUiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiUG9DLVNva2ktQXBwLUNsaWVudC0wMSI6eyJyb2xlcyI6WyJCQVNJQ19SRUdJU1RFUkVEX0NMSUVOVF9ST0xFIiwiT1BFUkFUT1JfQ0xJRU5UX1JPTEUiXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwgcm9sZXMiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwidXNlcl9uYW1lIjoiemV6aW5oby5zaW1wbGV1c2VyMDEiLCJuYW1lIjoiSm9zZTEgQm9jb2lvMSIsInByZWZlcnJlZF91c2VybmFtZSI6InplemluaG8uc2ltcGxldXNlcjAxIiwiZ2l2ZW5fbmFtZSI6Ikpvc2UxIiwiZmFtaWx5X25hbWUiOiJCb2NvaW8xIiwiZW1haWwiOiJ6ZXppbmhvMUBqYWJ1cnUuY29tLmJyIn0.TvOwtswQElgb8QA7GHlDYFLkk-HEFZlsQrJJGaMJs3P1CTCdp-af9jdoFyE_I6KvxkLZTBnwqDnowEfT0Dp7O5hae5M7hXk_0gVQa2mmOUloD5X6oGixJJI4LYH6SIfwepo0GGJTIKOFGyJgNnHwxc-AYrWosuc8r6aWMHv7szyJaytl_vSVMdsyymmZuWxJKPUD9IBieg0G4eomXj79RJ-fO7OVxnir0PYZznQfwefnBdLH_SXf00j_P70Q8xJKIp6AD1acn10otHgSnsGRKtR4twrWdsdnj5L9O-PYhyfaA_mtWu8w4drAm0bWNexCdIaFLP-MyfPCeSuyG8MvCA",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJyUGJ2anFBejhSTTVRU19RdldQemJDRUZFbGlfRFUzSlRyVTRnb1hmZ2xrIn0.eyJleHAiOjE2MDM2MjIwNzIsImlhdCI6MTYwMzYyMjAxMiwianRpIjoiMjYwYjkwMDYtMzkyYS00NGVlLThlYWUtNTM1MzAzNzUxMWI4IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDgwL2F1dGgvcmVhbG1zL21hc3RlciIsInN1YiI6IjFkYjg1YTViLWM3YjgtNDM1MC05NzNkLWM5ZmM5MDUxMzgxOSIsInR5cCI6IkJlYXJlciIsImF6cCI6ImFkbWluLWNsaSIsInNlc3Npb25fc3RhdGUiOiJkZmJiZmQ0NC1mODljLTQ0NWEtYTY4MS00ZmYwNDUxOTIxZjEiLCJhY3IiOiIxIiwic2NvcGUiOiJlbWFpbCBwcm9maWxlIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoiTWFuYWdlciAwMSBGcm9tIEFwcCBQcm94eSIsInByZWZlcnJlZF91c2VybmFtZSI6Im1hbmFnZXIwMS5mcm9tLmFwcC5wcm94eSIsImdpdmVuX25hbWUiOiJNYW5hZ2VyIDAxIiwiZmFtaWx5X25hbWUiOiJGcm9tIEFwcCBQcm94eSIsImVtYWlsIjoibWFuYWdlcjAxLmZyb20uYXBwLnByb3h5QHBvYy1zb2tpLmNvbSJ9.QTsUW7nl2IqEzf30LseHZJtpn2Q1NTsZP8gqKOQh_nAy8uyO48ktZWO9F2mlIA9aef2gDvBkI1q0JXg-PeBi5Th5e-lbAvK0YEvrjsduXl3y2B_3yx9Wo5xrKoZfZwKQbEnXzfQawK1aXl4OKoFnAbKctA0enS4OOSeT0lD-wdhqGekYfC6Ad5bLYYm2gh-BqCW0_31JPyg6K8nuTPFSXgvyE7hT4GkKvNTeMmoBGo1Kb9IIB08aTpEtZLdegHdPbGCU5ap1Jwm0Kp5aQF9_F2nhtsUTF3VCc3_uvbfWnH4L83cWL_ukVLin_4E-Roeuai0KJhoQaFqMJw0ARLur4g",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{vPoC-Soki-App-URL}}/api/business/countries/req-role-basic",
+							"host": [
+								"{{vPoC-Soki-App-URL}}"
+							],
+							"path": [
+								"api",
+								"business",
+								"countries",
+								"req-role-basic"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "03 - List Countries :: Requires Role: OPERATOR_CLIENT_ROLE",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJuWC1iZURtMWRyWGkwSTlhOXNYTkhkNFRxOTdQTkcwUnNYQ3VDR1hFVHFrIn0.eyJleHAiOjE2MDM2NTQ4ODIsImlhdCI6MTYwMzY1NDU4MiwianRpIjoiZDNhZWFjYWUtNTA4Ny00ZjE3LWI2MTYtYTgxMjcyNWNkMTEzIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDgwL2F1dGgvcmVhbG1zL1BvQy1Tb2tpLVJlYWxtLTAxIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjY4NDg4MDEzLWMxMjctNDhiNi1hYzc0LTlkYWUwMWYxY2Y2NyIsInR5cCI6IkJlYXJlciIsImF6cCI6IlBvQy1Tb2tpLUFwcC1DbGllbnQtMDEiLCJzZXNzaW9uX3N0YXRlIjoiYTExZDYzMmMtNTI1ZC00YTljLWE0MWMtN2YzZDBlMWFlMzE4IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwOi8vbG9jYWxob3N0OjgwODUiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIkFETUlOX1JFQUxNX1JPTEUiLCJCQVNJQ19SRUdJU1RFUkVEX1JFQUxNX1JPTEUiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiUG9DLVNva2ktQXBwLUNsaWVudC0wMSI6eyJyb2xlcyI6WyJCQVNJQ19SRUdJU1RFUkVEX0NMSUVOVF9ST0xFIiwiT1BFUkFUT1JfQ0xJRU5UX1JPTEUiXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwgcm9sZXMiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwidXNlcl9uYW1lIjoiemV6aW5oby5zaW1wbGV1c2VyMDEiLCJuYW1lIjoiSm9zZTEgQm9jb2lvMSIsInByZWZlcnJlZF91c2VybmFtZSI6InplemluaG8uc2ltcGxldXNlcjAxIiwiZ2l2ZW5fbmFtZSI6Ikpvc2UxIiwiZmFtaWx5X25hbWUiOiJCb2NvaW8xIiwiZW1haWwiOiJ6ZXppbmhvMUBqYWJ1cnUuY29tLmJyIn0.TvOwtswQElgb8QA7GHlDYFLkk-HEFZlsQrJJGaMJs3P1CTCdp-af9jdoFyE_I6KvxkLZTBnwqDnowEfT0Dp7O5hae5M7hXk_0gVQa2mmOUloD5X6oGixJJI4LYH6SIfwepo0GGJTIKOFGyJgNnHwxc-AYrWosuc8r6aWMHv7szyJaytl_vSVMdsyymmZuWxJKPUD9IBieg0G4eomXj79RJ-fO7OVxnir0PYZznQfwefnBdLH_SXf00j_P70Q8xJKIp6AD1acn10otHgSnsGRKtR4twrWdsdnj5L9O-PYhyfaA_mtWu8w4drAm0bWNexCdIaFLP-MyfPCeSuyG8MvCA",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJyUGJ2anFBejhSTTVRU19RdldQemJDRUZFbGlfRFUzSlRyVTRnb1hmZ2xrIn0.eyJleHAiOjE2MDM2MjIwNzIsImlhdCI6MTYwMzYyMjAxMiwianRpIjoiMjYwYjkwMDYtMzkyYS00NGVlLThlYWUtNTM1MzAzNzUxMWI4IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDgwL2F1dGgvcmVhbG1zL21hc3RlciIsInN1YiI6IjFkYjg1YTViLWM3YjgtNDM1MC05NzNkLWM5ZmM5MDUxMzgxOSIsInR5cCI6IkJlYXJlciIsImF6cCI6ImFkbWluLWNsaSIsInNlc3Npb25fc3RhdGUiOiJkZmJiZmQ0NC1mODljLTQ0NWEtYTY4MS00ZmYwNDUxOTIxZjEiLCJhY3IiOiIxIiwic2NvcGUiOiJlbWFpbCBwcm9maWxlIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoiTWFuYWdlciAwMSBGcm9tIEFwcCBQcm94eSIsInByZWZlcnJlZF91c2VybmFtZSI6Im1hbmFnZXIwMS5mcm9tLmFwcC5wcm94eSIsImdpdmVuX25hbWUiOiJNYW5hZ2VyIDAxIiwiZmFtaWx5X25hbWUiOiJGcm9tIEFwcCBQcm94eSIsImVtYWlsIjoibWFuYWdlcjAxLmZyb20uYXBwLnByb3h5QHBvYy1zb2tpLmNvbSJ9.QTsUW7nl2IqEzf30LseHZJtpn2Q1NTsZP8gqKOQh_nAy8uyO48ktZWO9F2mlIA9aef2gDvBkI1q0JXg-PeBi5Th5e-lbAvK0YEvrjsduXl3y2B_3yx9Wo5xrKoZfZwKQbEnXzfQawK1aXl4OKoFnAbKctA0enS4OOSeT0lD-wdhqGekYfC6Ad5bLYYm2gh-BqCW0_31JPyg6K8nuTPFSXgvyE7hT4GkKvNTeMmoBGo1Kb9IIB08aTpEtZLdegHdPbGCU5ap1Jwm0Kp5aQF9_F2nhtsUTF3VCc3_uvbfWnH4L83cWL_ukVLin_4E-Roeuai0KJhoQaFqMJw0ARLur4g",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{vPoC-Soki-App-URL}}/api/business/countries/req-role-operator",
+							"host": [
+								"{{vPoC-Soki-App-URL}}"
+							],
+							"path": [
+								"api",
+								"business",
+								"countries",
+								"req-role-operator"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "04 - List Countries :: Requires Role: ADMIN_CLIENT_ROLE",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJuWC1iZURtMWRyWGkwSTlhOXNYTkhkNFRxOTdQTkcwUnNYQ3VDR1hFVHFrIn0.eyJleHAiOjE2MDM2NTQ4ODIsImlhdCI6MTYwMzY1NDU4MiwianRpIjoiZDNhZWFjYWUtNTA4Ny00ZjE3LWI2MTYtYTgxMjcyNWNkMTEzIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDgwL2F1dGgvcmVhbG1zL1BvQy1Tb2tpLVJlYWxtLTAxIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjY4NDg4MDEzLWMxMjctNDhiNi1hYzc0LTlkYWUwMWYxY2Y2NyIsInR5cCI6IkJlYXJlciIsImF6cCI6IlBvQy1Tb2tpLUFwcC1DbGllbnQtMDEiLCJzZXNzaW9uX3N0YXRlIjoiYTExZDYzMmMtNTI1ZC00YTljLWE0MWMtN2YzZDBlMWFlMzE4IiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwOi8vbG9jYWxob3N0OjgwODUiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIkFETUlOX1JFQUxNX1JPTEUiLCJCQVNJQ19SRUdJU1RFUkVEX1JFQUxNX1JPTEUiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiUG9DLVNva2ktQXBwLUNsaWVudC0wMSI6eyJyb2xlcyI6WyJCQVNJQ19SRUdJU1RFUkVEX0NMSUVOVF9ST0xFIiwiT1BFUkFUT1JfQ0xJRU5UX1JPTEUiXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwgcm9sZXMiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwidXNlcl9uYW1lIjoiemV6aW5oby5zaW1wbGV1c2VyMDEiLCJuYW1lIjoiSm9zZTEgQm9jb2lvMSIsInByZWZlcnJlZF91c2VybmFtZSI6InplemluaG8uc2ltcGxldXNlcjAxIiwiZ2l2ZW5fbmFtZSI6Ikpvc2UxIiwiZmFtaWx5X25hbWUiOiJCb2NvaW8xIiwiZW1haWwiOiJ6ZXppbmhvMUBqYWJ1cnUuY29tLmJyIn0.TvOwtswQElgb8QA7GHlDYFLkk-HEFZlsQrJJGaMJs3P1CTCdp-af9jdoFyE_I6KvxkLZTBnwqDnowEfT0Dp7O5hae5M7hXk_0gVQa2mmOUloD5X6oGixJJI4LYH6SIfwepo0GGJTIKOFGyJgNnHwxc-AYrWosuc8r6aWMHv7szyJaytl_vSVMdsyymmZuWxJKPUD9IBieg0G4eomXj79RJ-fO7OVxnir0PYZznQfwefnBdLH_SXf00j_P70Q8xJKIp6AD1acn10otHgSnsGRKtR4twrWdsdnj5L9O-PYhyfaA_mtWu8w4drAm0bWNexCdIaFLP-MyfPCeSuyG8MvCA",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJyUGJ2anFBejhSTTVRU19RdldQemJDRUZFbGlfRFUzSlRyVTRnb1hmZ2xrIn0.eyJleHAiOjE2MDM2MjIwNzIsImlhdCI6MTYwMzYyMjAxMiwianRpIjoiMjYwYjkwMDYtMzkyYS00NGVlLThlYWUtNTM1MzAzNzUxMWI4IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDgwL2F1dGgvcmVhbG1zL21hc3RlciIsInN1YiI6IjFkYjg1YTViLWM3YjgtNDM1MC05NzNkLWM5ZmM5MDUxMzgxOSIsInR5cCI6IkJlYXJlciIsImF6cCI6ImFkbWluLWNsaSIsInNlc3Npb25fc3RhdGUiOiJkZmJiZmQ0NC1mODljLTQ0NWEtYTY4MS00ZmYwNDUxOTIxZjEiLCJhY3IiOiIxIiwic2NvcGUiOiJlbWFpbCBwcm9maWxlIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoiTWFuYWdlciAwMSBGcm9tIEFwcCBQcm94eSIsInByZWZlcnJlZF91c2VybmFtZSI6Im1hbmFnZXIwMS5mcm9tLmFwcC5wcm94eSIsImdpdmVuX25hbWUiOiJNYW5hZ2VyIDAxIiwiZmFtaWx5X25hbWUiOiJGcm9tIEFwcCBQcm94eSIsImVtYWlsIjoibWFuYWdlcjAxLmZyb20uYXBwLnByb3h5QHBvYy1zb2tpLmNvbSJ9.QTsUW7nl2IqEzf30LseHZJtpn2Q1NTsZP8gqKOQh_nAy8uyO48ktZWO9F2mlIA9aef2gDvBkI1q0JXg-PeBi5Th5e-lbAvK0YEvrjsduXl3y2B_3yx9Wo5xrKoZfZwKQbEnXzfQawK1aXl4OKoFnAbKctA0enS4OOSeT0lD-wdhqGekYfC6Ad5bLYYm2gh-BqCW0_31JPyg6K8nuTPFSXgvyE7hT4GkKvNTeMmoBGo1Kb9IIB08aTpEtZLdegHdPbGCU5ap1Jwm0Kp5aQF9_F2nhtsUTF3VCc3_uvbfWnH4L83cWL_ukVLin_4E-Roeuai0KJhoQaFqMJw0ARLur4g",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{vPoC-Soki-App-URL}}/api/business/countries/req-role-admin",
+							"host": [
+								"{{vPoC-Soki-App-URL}}"
+							],
+							"path": [
+								"api",
+								"business",
+								"countries",
+								"req-role-admin"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "5956794a-82a9-4084-9ccf-2d840d48e6f4",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "7000d8f1-df3b-4eb4-b2d9-e8a17f148061",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "4fcc9079-175b-4f92-a979-24731b0126e6",
+			"key": "{{vKeycloakHostURL}}",
+			"value": "http://localhost:9080"
+		},
+		{
+			"id": "81136f35-3f7c-4933-8492-8bff2abaf409",
+			"key": "{{vPoC-Soki-App-URL}}",
+			"value": "http://localhost:8085"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

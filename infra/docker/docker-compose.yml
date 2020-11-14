@@ -1,0 +1,89 @@
+version: '3'
+
+services:
+
+    app-infra-db-postgresql-poc-01:  # port: 5432:5432
+        image: kartoza/postgis:${POSTGRESQL_VERSION}
+        container_name: app-infra-db-postgresql-poc-01
+        environment:
+            DEFAULT_ENCODING: "UTF-8"
+            DEFAULT_COLLATION: "id_ID.utf8"
+            DEFAULT_CTYPE: "en_US.UTF-8"
+            RECREATE_DATADIR: "false"
+            IP_LIST: "*"
+        ports:
+            - "5432:5432"
+        volumes:
+            - pocsoki-vlmcfg-postgresql-srv-01-data:/var/lib/postgresql
+            - ./containers-init-configs/postgresql-srv-01/init-scripts/00-create-users.sql:/docker-entrypoint-initdb.d/00-create-users.sql
+            - ./containers-init-configs/postgresql-srv-01/init-scripts/01-init-dbs-schemas.sql:/docker-entrypoint-initdb.d/01-init-dbs-schemas.sql
+            - ./containers-init-configs/postgresql-srv-01/init-scripts/02-keycloak-dump-to-load.sql:/docker-entrypoint-initdb.d/02-keycloak-dump-to-load.sql
+        networks:
+            - PoC-DevToolsEnv-Network
+
+
+    app-infra-keycloak:
+        image: jboss/keycloak:${KEYCLOAK_VERSION}
+        container_name: app-infra-keycloak
+        command:
+          [
+                  '-b',
+                  '0.0.0.0',
+                  '-Dkeycloak.migration.action=import',
+                  '-Dkeycloak.migration.provider=dir',
+                  '-Dkeycloak.migration.dir=/opt/jboss/keycloak/realm-config',
+                  '-Dkeycloak.migration.strategy=OVERWRITE_EXISTING',
+                  '-Djboss.socket.binding.port-offset=1000',
+                  '-Dkeycloak.profile.feature.upload_scripts=enabled',
+          ]
+        volumes:
+            - ./containers-init-configs/keycloak/configs/realm-config:/opt/jboss/keycloak/realm-config
+        environment:
+            - DB_VENDOR=POSTGRES
+            - DB_ADDR=app-infra-db-postgresql-poc-01
+            - DB_DATABASE=DBPoc-SpringOAuth2-Keycloak
+            - DB_USER=dbamaster01
+            - DB_PASSWORD=1a88a1
+            - KEYCLOAK_USER=admin
+            - KEYCLOAK_PASSWORD=Pa55w0rd
+        ports:
+            - 9080:9080
+            - 9443:9443
+            - 10990:10990
+        depends_on:
+            - app-infra-db-postgresql-poc-01
+        links:
+            - app-infra-db-postgresql-poc-01
+        #  restart: 'always'
+        networks:
+            - PoC-DevToolsEnv-Network
+
+
+    app-infra-pgadmin4: # port: 16543:80
+        image: dpage/pgadmin4
+        container_name: app-infra-pgadmin4
+        environment:
+            PGADMIN_DEFAULT_EMAIL: "dba-qq@pgadmin.com"
+            PGADMIN_DEFAULT_PASSWORD: "1a88a1"
+        ports:
+            - "16543:80"
+        depends_on:
+            - app-infra-db-postgresql-poc-01
+        networks:
+            - PoC-DevToolsEnv-Network
+
+
+# Networks configurations
+networks:
+    PoC-DevToolsEnv-Network:
+        driver: bridge
+
+
+# Volumes for persisting data, see https://docs.docker.com/engine/admin/volumes/volumes/
+volumes:
+
+    pocsoki-vlmcfg-postgresql-srv-01-data:
+        driver_opts:
+            type: none
+            o: bind
+            device: ${VOLUME_POSTGRESQL_SRV_01_DATA_PATH}

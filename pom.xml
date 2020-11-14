@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+
+    <groupId>de.com.ailyteam.codingtest</groupId>
+    <artifactId>mktplcs-gateway-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>AilyTeam-MarketPlaces-Gateway-CodingTest-ALNS-Parent</name>
+    <description>AilyTeam-MarketPlaces-Gateway-CodingTest-ALNS</description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>11</java.version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <spring-boot.version>2.3.0.RELEASE</spring-boot.version>
+        <spring-cloud-openfeign.version>2.2.5.RELEASE</spring-cloud-openfeign.version>
+        <springfox.version>2.9.2</springfox.version>
+        <mapstruct.version>1.4.0.Final</mapstruct.version>
+        <hibernate-validator.version>6.0.9.Final</hibernate-validator.version>
+        <slf4j-api.version>1.7.30</slf4j-api.version>
+    </properties>
+
+
+    <modules>
+        <module>ailyteam-commons-utils</module>
+        <module>ailyteam-extpartner-tillhub-sdk</module>
+        <module>ailyteam-mktplcs-gateway-web</module>
+    </modules>
+
+
+   <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <!-- Import dependency management from Spring Boot -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>    
+
+</project>
