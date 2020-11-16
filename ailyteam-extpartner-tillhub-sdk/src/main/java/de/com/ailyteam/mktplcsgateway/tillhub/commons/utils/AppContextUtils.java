@@ -21,13 +21,11 @@ import java.util.Map;
  */
 @Component
 @Slf4j
-public class SecurityContextUtils {
-
-    private static final String ANONYMOUS = "anonymous";
+public class AppContextUtils {
 
     private static Map<String, AuthenticationResponse> ALL_CREATED_JWTTOKENS_MAP = new LinkedHashMap<>();
 
-    private SecurityContextUtils() {
+    private AppContextUtils() {
     }
 
     public static Map<String, AuthenticationResponse> getAllCreatedJWTTokensMap() {

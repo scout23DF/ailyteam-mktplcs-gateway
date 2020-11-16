@@ -1,35 +1,33 @@
 package de.com.ailyteam.mktplcsgateway.tillhub.domains.products.services.impl;
 
 import de.com.ailyteam.mktplcsgateway.tillhub.commons.dtos.THPaginatedResponseDTO;
+import de.com.ailyteam.mktplcsgateway.tillhub.commons.services.CommonsUtilsService;
 import de.com.ailyteam.mktplcsgateway.tillhub.domains.accesscontrol.dtos.responses.AuthenticationResponse;
 import de.com.ailyteam.mktplcsgateway.tillhub.domains.products.dtos.THProductDTO;
 import de.com.ailyteam.mktplcsgateway.tillhub.domains.products.services.ITHProductService;
-import de.com.ailyteam.mktplcsgateway.tillhub.domains.accesscontrol.services.ITHAuthenticationService;
-import de.com.ailyteam.mktplcsgateway.tillhub.commons.utils.AppSecurityProperties;
+import de.com.ailyteam.mktplcsgateway.tillhub.config.TillHubAPIPartnerProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import de.com.ailyteam.mktplcsgateway.tillhub.domains.products.feignclients.ITHProductAPIClient;
 
-import java.util.Optional;
-
 @Service
 @Slf4j
 public class THProductServiceImpl implements ITHProductService {
 
     private ITHProductAPIClient thProductAPIClient;
-    private ITHAuthenticationService thAuthenticationService;
-    private AppSecurityProperties appSecurityProperties;
+    private CommonsUtilsService commonsUtilsService;
+    private TillHubAPIPartnerProperties tillHubAPIPartnerProperties;
 
     @Autowired
     public THProductServiceImpl(ITHProductAPIClient pITHProductAPIClient,
-                                ITHAuthenticationService pITHAuthenticationService,
-                                AppSecurityProperties pAppSecurityProperties) {
+                                CommonsUtilsService pCommonsUtilsService,
+                                TillHubAPIPartnerProperties pTillHubAPIPartnerProperties) {
 
         this.thProductAPIClient = pITHProductAPIClient;
-        this.thAuthenticationService = pITHAuthenticationService;
-        this.appSecurityProperties = pAppSecurityProperties;
+        this.commonsUtilsService = pCommonsUtilsService;
+        this.tillHubAPIPartnerProperties = pTillHubAPIPartnerProperties;
     }
 
     @Override
@@ -37,15 +35,43 @@ public class THProductServiceImpl implements ITHProductService {
         AuthenticationResponse authUserResp;
         THPaginatedResponseDTO<THProductDTO> thPaginatedPoductFoundDTO = null;
 
-        authUserResp = thAuthenticationService.authenticateUserWithCredentialFromArqConfig();
+        authUserResp = commonsUtilsService.getFromCacheOrCreateAuthenticatedUser();
 
-        if (authUserResp != null && authUserResp.getStatus() == HttpStatus.OK.value()) {
+        thPaginatedPoductFoundDTO = thProductAPIClient.findProductByBarcode(authUserResp.getUserDTO().getLegacyId(),
+                                                                            pBarcodeNum,
+                                                                            authUserResp.getFullTokenAuthorization());
 
-            thPaginatedPoductFoundDTO = thProductAPIClient.findProductByBarcode(authUserResp.getUserDTO().getLegacyId(),
-                                                                        pBarcodeNum,
-                                                          authUserResp.getTokenType() + " " + authUserResp.getToken());
+        return thPaginatedPoductFoundDTO;
+    }
 
-        }
+    @Override
+    public THPaginatedResponseDTO<THProductDTO> searchProductById(String pProductId) {
+        AuthenticationResponse authUserResp;
+        THPaginatedResponseDTO<THProductDTO> thPaginatedPoductFoundDTO = null;
+
+        authUserResp = commonsUtilsService.getFromCacheOrCreateAuthenticatedUser();
+
+        thPaginatedPoductFoundDTO = thProductAPIClient.findProductById(authUserResp.getUserDTO().getLegacyId(),
+                                                                       pProductId,
+                                                                       authUserResp.getFullTokenAuthorization());
+
+        return thPaginatedPoductFoundDTO;
+    }
+
+    @Override
+    public THPaginatedResponseDTO<THProductDTO> searchProductByFuzzySearch(String pSearchTerm) {
+        AuthenticationResponse authUserResp;
+        THPaginatedResponseDTO<THProductDTO> thPaginatedPoductFoundDTO = null;
+
+        authUserResp = commonsUtilsService.getFromCacheOrCreateAuthenticatedUser();
+
+        thPaginatedPoductFoundDTO = thProductAPIClient.findProductByFuzzySearch(authUserResp.getUserDTO().getLegacyId(),
+                                                                                pSearchTerm,
+                                                                                null,
+                                                                                null,
+                                                                                null,
+                                                                                null,
+                                                                                authUserResp.getFullTokenAuthorization());
 
         return thPaginatedPoductFoundDTO;
     }

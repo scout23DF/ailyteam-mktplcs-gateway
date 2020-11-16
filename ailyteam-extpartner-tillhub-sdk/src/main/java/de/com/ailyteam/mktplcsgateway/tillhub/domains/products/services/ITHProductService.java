@@ -6,5 +6,7 @@ import de.com.ailyteam.mktplcsgateway.tillhub.domains.products.dtos.THProductDTO
 public interface ITHProductService {
 
     THPaginatedResponseDTO<THProductDTO> searchProductByBarcode(String pBarcodeNum);
+    THPaginatedResponseDTO<THProductDTO> searchProductById(String pProductId);
+    THPaginatedResponseDTO<THProductDTO> searchProductByFuzzySearch(String pSearchTerm);
 
 }

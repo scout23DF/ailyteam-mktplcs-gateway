@@ -28,4 +28,20 @@ public class AuthenticationResponse extends THGenericBaseResponse {
     @JsonProperty("expires_at")
     private LocalDateTime expiresAt;
 
+
+    public String getFullTokenAuthorization() {
+        return this.getTokenType() + " " + this.getToken();
+    }
+
+    public Boolean isAccessTokenExpired() {
+        Boolean bolResult = false;
+        LocalDateTime checkingTime = LocalDateTime.now();
+
+        if (getToken() != null && getExpiresAt() != null) {
+            bolResult = getExpiresAt().isBefore(checkingTime);
+        }
+
+        return bolResult;
+    }
+
 }
